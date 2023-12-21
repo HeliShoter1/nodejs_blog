@@ -1,0 +1,18 @@
+@import '__variables';
+
+h1 {
+    color: $red-color;
+}
+
+a{
+    color: black;
+}
+
+a:hover{
+    text-decoration: none; 
+    color: rgb(70, 68, 68);
+}
+
+p {
+    white-space: pre-line;
+}
