@@ -1,9 +1,12 @@
 <div class="mt-4">
-    <form method="get" action="/">
+    <form method="post" action="/home">
+        <p>{{Notification}}</p>
         <div class="form-group" >
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" >
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <small>
+                {{err}}
+            </small>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>

@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import path from 'path';
 import { engine } from 'express-handlebars';
 import { fileURLToPath } from 'url';
+import { checkToken } from './app/security/jwt.js';
 import * as index_route from './routes/index.js';
 import * as db from './config/db/index.js';
 
