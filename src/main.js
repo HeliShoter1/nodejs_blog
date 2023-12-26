@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
+import BodyParser from 'body-parser';
 import { engine } from 'express-handlebars';
 import { fileURLToPath } from 'url';
 import { checkToken } from './app/security/jwt.js';
@@ -11,6 +12,7 @@ db.connect();
 
 const app = express();
 const port = 3000;
+const bodyParser = BodyParser;
 const handlebars = engine;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,6 +26,7 @@ app.use(express.json());
 app.use(morgan('combined'));
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.engine(
     'handlebars',

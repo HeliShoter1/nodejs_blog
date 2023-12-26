@@ -1,6 +1,6 @@
 import express from 'express';
 import { controller_new } from '../app/controller/Controller_New.js';
-import { checkToken,tokenMiddleware } from '../app/security/jwt.js';
+import { checkToken} from '../app/security/jwt.js';
 
 express.urlencoded({
     extended: true,

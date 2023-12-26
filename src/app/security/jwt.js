@@ -7,23 +7,34 @@ export function createToken(user){
   return jwt.sign(user,secretKey,{expiresIn: expiration});
 }
 
-export function checkToken(req, res,next) {
-    const splitTk = req.headers.authorization.split(" ");
-    const tk = splitTk[1];
-    if (tk) {
-      jwt.verify(tk, secretKey, (err, decode) => {
-        if (err) {
-          return res.status(401).json({ message: 'Token false' }); 
-        } else {
-            next();
-        }
-      });
-    } else {    
-        return res.status(403).json({ message: 'Token are not provided' }); 
-    }
+export function checkToken(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+      const splitHeader = authHeader.split(" ");
+      const token = splitHeader[1];
+      if (token) {
+          jwt.verify(token, secretKey, (err, decoded) => {
+              if (err) {
+                  return res.status(401).json({ message: 'Token is invalid' });
+              } else {
+                  next();
+              }
+          });
+      } else {
+          return res.status(403).json({ message: 'Token is not provided' });
+      }
+  } else {
+      return res.status(403).json({ message: 'Authorization header is missing' });
+  }
 }
 
-export function tokenMiddleware(req, res, next) {
-    const token = req.headers.authorization ? req.headers.authorization : "";
-    res.set('Authorization', `Bearer ${token}`); 
+export function addTokenToRequest(req, res, next) {
+  let tk = res.headers.authorization;
+  req.token = tk;
+  next();
+}
+
+export function decodeToken(token){
+    token = token.split(" ")[1];
+    return jwt.verify(token,secretKey);
 }

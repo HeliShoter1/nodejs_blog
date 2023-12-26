@@ -5,7 +5,7 @@ import { createToken } from "../security/jwt.js";
 
 export default class Controller_Site {
     index(req, res, next) {
-        console.log(req.headers.authorization);
+        console.log(req.token);
         content_Model
             .find({})
             .then((content) => {

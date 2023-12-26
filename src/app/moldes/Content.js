@@ -7,12 +7,13 @@ const Schema = mongoose.Schema;
 
 const ContentSchema = new Schema({
     name: { type: String, maxLength: 100 },
-    decription: { type: String, maxLength: 500 },
+    decription: { type: String, maxLength: 1000 },
     image: { type: String, default:'https://images.spiderum.com/sp-thumbnails/defaultthumbnail.png' },
     createAt: { type: Date, default: Date.now },
     updateAt: { type: Date, default: Date.now },
     content: { type: String },
     slug:{type: String, slug: 'name'},
+    idUser: {type: String}
 });
 
 const content_Model = mongoose.model('news', ContentSchema);
